@@ -46,10 +46,32 @@ module.exports.register = async (req, res) => {
       .status(200)
       .json({ status: 200, message: "User registered successfully!" });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err?.message });
   }
 };
 
-module.exports.login = async = (req, res) => {
-  return res.status(200).json({ message: "GET API CALLED" });
+module.exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "Email is Required" });
+    }
+    if (!password) {
+      return res.status(400).json({ message: "Password is Required" });
+    }
+    const user = await UserModal.findOne({ email: email });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+    const match = await comparePassword(password, user.password);
+    if (!match) {
+      return res.status(400).json({ message: "Wrong Password" });
+    }
+    user.password = undefined;
+    res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
