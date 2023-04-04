@@ -2,7 +2,6 @@ const UserModal = require("../models/user");
 const { hashPassword, comparePassword } = require("../helpers/Auth");
 
 module.exports.register = async (req, res) => {
-  console.log("req---------", req);
   try {
     const { firstName, lastName, password, email, phoneNumber } = req.body;
     if (!firstName) {
@@ -74,4 +73,7 @@ module.exports.login = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+};
+module.exports.test = async (req, res) => {
+  return res.status(200).json("API App is Running!");
 };
