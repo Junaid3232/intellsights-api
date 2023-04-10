@@ -59,13 +59,15 @@ module.exports.addBeverage = async (req, res) => {
       status,
     });
 
-    await beverage.save();
+    await beverage
+      .save()
+      .catch((err) => res.status(400).json({ isSuccess: false, message: err }));
     res.status(200).json({
       isSuccess: true,
       message: "Beverage added successfully!",
     });
   } catch (err) {
-    res.status(404).json({
+    res.status(400).json({
       isSuccess: false,
     });
   }
