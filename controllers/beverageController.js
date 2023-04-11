@@ -4,7 +4,8 @@ const fs = require("fs");
 
 module.exports.addBeverage = async (req, res) => {
   try {
-    const { location, name, packSize, pay, purchasedItem, status } = req.body;
+    const { latitude, longitute, name, packSize, pay, purchasedItem, status } =
+      req.body;
     const shopImage = {
       data: req.files["shopImage"][0].path,
       contentType: "image/png",
@@ -36,7 +37,8 @@ module.exports.addBeverage = async (req, res) => {
     const beverage = new BeverageModel({
       shopImage,
       beverageImage,
-      location,
+      latitude,
+      longitute,
       name,
       packSize,
       pay,

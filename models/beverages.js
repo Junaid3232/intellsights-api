@@ -1,13 +1,6 @@
 const mongoose = require("mongoose");
 
-const locationSchema = new mongoose.Schema({
-  latitude: {
-    type: String,
-  },
-  longitute: {
-    type: String,
-  },
-});
+const locationSchema = new mongoose.Schema({});
 
 const BeverageModel = mongoose.Schema({
   shopImage: {
@@ -18,7 +11,12 @@ const BeverageModel = mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
-  location: { type: locationSchema },
+  latitude: {
+    type: String,
+  },
+  longitute: {
+    type: String,
+  },
   name: {
     type: String,
     required: true,
