@@ -6,14 +6,19 @@ module.exports.addBeverage = async (req, res) => {
   try {
     const { latitude, longitute, name, packSize, pay, purchasedItem, status } =
       req.body;
-    const shopImage = {
-      data: req.files["shopImage"][0].path,
-      contentType: "image/png",
-    };
-    const beverageImage = {
-      data: req.files["beverageImage"][0].path,
-      contentType: "image/png",
-    };
+    let beverageImage = null;
+    let shopImage = null;
+    if (req.files.length == 1) {
+      shopImage = {
+        data: req?.files["shopImage"][0]?.path,
+        contentType: "image/png",
+      };
+    } else if (req.files.length == 2) {
+      beverageImage = {
+        data: req?.files["beverageImage"][0]?.path,
+        contentType: "image/png",
+      };
+    }
     if (!name) {
       res.status(400).json({ isSuccess: false, message: "Name is required" });
     }
@@ -53,8 +58,10 @@ module.exports.addBeverage = async (req, res) => {
       message: "Beverage added successfully!",
     });
   } catch (err) {
+    console.log("---eeror", err);
     res.status(400).json({
       isSuccess: false,
+      message: err,
     });
   }
 };
