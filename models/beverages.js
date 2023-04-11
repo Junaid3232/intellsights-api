@@ -3,11 +3,9 @@ const mongoose = require("mongoose");
 const locationSchema = new mongoose.Schema({
   latitude: {
     type: String,
-    required: true,
   },
   longitute: {
     type: String,
-    required: true,
   },
 });
 

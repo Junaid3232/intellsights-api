@@ -13,21 +13,6 @@ module.exports.addBeverage = async (req, res) => {
       data: req.files["beverageImage"][0].path,
       contentType: "image/png",
     };
-    if (!shopImage) {
-      res
-        .status(400)
-        .json({ isSuccess: false, message: "Shop Image is required" });
-    }
-    if (!beverageImage) {
-      res
-        .status(400)
-        .json({ isSuccess: false, message: "Beverage Image is required" });
-    }
-    if (!location) {
-      res
-        .status(400)
-        .json({ isSuccess: false, message: "Location is required" });
-    }
     if (!name) {
       res.status(400).json({ isSuccess: false, message: "Name is required" });
     }
@@ -59,9 +44,8 @@ module.exports.addBeverage = async (req, res) => {
       status,
     });
 
-    await beverage
-      .save()
-      .catch((err) => res.status(400).json({ isSuccess: false, message: err }));
+    await beverage.save();
+
     res.status(200).json({
       isSuccess: true,
       message: "Beverage added successfully!",
