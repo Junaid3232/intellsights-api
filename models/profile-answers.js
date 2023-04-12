@@ -1,22 +1,23 @@
 const mongoose = require("mongoose");
 
 const ProfileAnswersSchema = new mongoose.Schema({
-  Survay: {
+  survayName: {
     type: String,
   },
-  Id: {
+  survayId: {
+    type: String,
+  },
+  sumbittedById: {
     type: String,
   },
 
-  Questions: [
+  answerList: [
     {
-      Id: Number,
-      Name: String,
-      Answers: {
-        Id: Number,
-        Name: String,
-        Score: Number,
-      },
+      AnswerId: Number,
+      IsChecked: Boolean,
+      Answer: String,
+      QuestionId: String,
+      Question: String,
     },
   ],
 });
@@ -24,5 +25,5 @@ const ProfileAnswersSchema = new mongoose.Schema({
 module.exports = mongoose.model(
   "ProfileAnswers",
   ProfileAnswersSchema,
-  "questions-results"
+  "profile-questions-results"
 );

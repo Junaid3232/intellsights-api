@@ -16,5 +16,5 @@ router.get(
 );
 router.post("/add-beverage", upload, beverageController.addBeverage);
 router.post("/save-profile-answers", profileAnswers.profileAnswers);
-router.post("/save-emotional-answers", profileAnswers.profileAnswers);
+router.post("/save-emotional-answers", profileAnswers.emotionalAnswers);
 module.exports = router;
