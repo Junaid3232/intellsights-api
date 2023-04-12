@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ProfileQuestionsSchema = new mongoose.Schema({
-  id: {
+  Id: {
     type: Number,
   },
   Name: {
